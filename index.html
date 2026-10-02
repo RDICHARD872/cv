@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica de codificación y adaptabilidad para dispositivos móviles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Ricardo Rivas</title>
+    
+    <!-- Enlace a la hoja de estilos personalizada -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Librería externa para la generación instantánea de PDF (html2pdf.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Encabezado de la página: Contiene el botón de PDF y el selector de idiomas -->
+    <header>
+        <!-- Botón para descargar el currículum en PDF de forma automática -->
+        <button id="download-btn" onclick="generatePDF()">
+            📄 <span data-i18n="download_pdf"></span>
+        </button>
+        
+        <!-- Contenedor general para la selección de idiomas -->
+        <div class="lang-wrapper">
+            <!-- Etiqueta fija descriptiva -->
+            <span class="lang-label">Language:</span>
+            
+            <!-- Menú desplegable personalizado y estilizado -->
+            <div class="custom-select" id="custom-lang-select">
+                <!-- Caja visual que muestra el idioma seleccionado actualmente -->
+                <div class="select-selected">Español</div>
+                
+                <!-- Lista desplegable con las opciones de idioma -->
+                <div class="select-items select-hide">
+                    <!-- Idiomas principales gestionados de forma nativa -->
+                    <div data-val="es" data-type="official">Español</div>
+                    <div data-val="en" data-type="official">English</div>
+                    
+                    <!-- Idiomas traducidos en tiempo real mediante la integración de Google Translate -->
+                    <div data-val="fr" data-type="google"><span data-i18n="lang_fr">Français (Francés)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="de" data-type="google"><span data-i18n="lang_de">Deutsch (Alemán)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="it" data-type="google"><span data-i18n="lang_it">Italiano (Italiano)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="pt" data-type="google"><span data-i18n="lang_pt">Português (Portugués)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="ja" data-type="google"><span data-i18n="lang_ja">日本語 (Japonés)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+
+                    <!-- Idiomas globales adicionales de gran popularidad -->
+                    <div data-val="zh-CN" data-type="google"><span data-i18n="lang_zh">中文 (Chino)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="hi" data-type="google"><span data-i18n="lang_hi">हिन्दी (Hindi)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="ar" data-type="google"><span data-i18n="lang_ar">العربية (Árabe)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="ru" data-type="google"><span data-i18n="lang_ru">Русский (Ruso)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                    <div data-val="ko" data-type="google"><span data-i18n="lang_ko">한국어 (Coreano)</span> <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon" alt="G"></div>
+                </div>
+            </div>
+
+            <!-- Selector nativo original (Oculto visualmente, pero utilizado por la lógica de JavaScript) -->
+            <select id="language-selector" style="display: none;">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            
+            <!-- Elemento contenedor requerido y oculto para el funcionamiento del script de Google Translate -->
+            <div id="google_translate_element" style="display: none;"></div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal donde se aloja todo el contenido del currículum -->
+    <main>
+        <!-- Sección de Datos de Contacto e Información Personal -->
+        <section id="contact">
+            <h1 data-i18n="name"></h1>
+            <!-- Enlaces interactivos: Teléfono (WhatsApp), Correo (mailto) y Ubicación (Google Maps) -->
+            <p>
+                <a href="https://wa.me/50370991184" target="_blank" data-i18n="phone"></a> | 
+                <a href="mailto:rivasricardo90@gmail.com" data-i18n="email"></a> | 
+                <a href="https://maps.google.com/?q=San+Salvador,+El+Salvador" target="_blank" data-i18n="location"></a>
+            </p>
+            <!-- Redes profesionales -->
+            <p>
+                <a href="https://www.linkedin.com/in/ricardo-rivas-90432122b" target="_blank" data-i18n="linkedin"></a> | 
+                <a href="https://github.com/RDICHARD872" target="_blank" data-i18n="github"></a>
+            </p>
+        </section>
+
+        <!-- Sección de Perfil Profesional -->
+        <section id="profile">
+            <h2 data-i18n="profile_heading"></h2>
+            <p data-i18n="profile_desc"></p>
+        </section>
+
+        <!-- Sección de Experiencia Laboral -->
+        <section id="experience">
+            <h2 data-i18n="exp_heading"></h2>
+            <div class="job">
+                <h3 data-i18n="job1_title"></h3>
+                <p data-i18n="job1_company"></p>
+                <p data-i18n="job1_desc"></p>
+            </div>
+            <div class="job">
+                <h3 data-i18n="job2_title"></h3>
+                <p data-i18n="job2_company"></p>
+            </div>
+        </section>
+
+        <!-- Sección de Educación y Formación Académica -->
+        <section id="education">
+            <h2 data-i18n="edu_heading"></h2>
+            <div class="school">
+                <h3 data-i18n="edu1_degree"></h3>
+                <p data-i18n="edu1_school"></p>
+            </div>
+            <div class="school">
+                <h3 data-i18n="edu2_degree"></h3>
+                <p data-i18n="edu2_school"></p>
+                <p data-i18n="edu2_desc"></p>
+            </div>
+            <div class="school">
+                <h3 data-i18n="edu3_degree"></h3>
+                <p data-i18n="edu3_school"></p>
+            </div>
+            <div class="school">
+                <h3 data-i18n="edu4_degree"></h3>
+                <p data-i18n="edu4_school"></p>
+            </div>
+        </section>
+
+        <!-- Sección de Habilidades Técnicas -->
+        <section id="skills">
+            <h2 data-i18n="skills_heading"></h2>
+            <ul>
+                <li><strong data-i18n="skill1_name"></strong>: <span data-i18n="skill1_desc"></span></li>
+                <li><strong data-i18n="skill2_name"></strong>: <span data-i18n="skill2_desc"></span></li>
+                <li><strong data-i18n="skill3_name"></strong>: <span data-i18n="skill3_desc"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sección de Idiomas dominados -->
+        <section id="languages">
+            <h2 data-i18n="lang_heading"></h2>
+            <ul>
+                <li><strong data-i18n="lang1_name"></strong>: <span data-i18n="lang1_level"></span></li>
+                <li><strong data-i18n="lang2_name"></strong>: <span data-i18n="lang2_level"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sección de Pasatiempos e Intereses -->
+        <section id="hobbies">
+            <h2 data-i18n="hobbies_heading"></h2>
+            <p data-i18n="hobbies_desc"></p>
+        </section>
+
+        <!-- Sección de Referencias Personales y Familiares -->
+        <section id="references">
+            <h2 data-i18n="ref_heading"></h2>
+            
+            <h3 data-i18n="ref_personal_heading"></h3>
+            <ul class="ref-list">
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_p1_name"></span>
+                            <span class="ref-relation" data-i18n="ref_p1_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_p1_phone"></span>
+                            <span data-i18n="ref_p1_email"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_p2_name"></span>
+                            <span class="ref-relation" data-i18n="ref_p2_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_p2_phone"></span>
+                            <span data-i18n="ref_p2_email"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_p3_name"></span>
+                            <span class="ref-relation" data-i18n="ref_p3_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_p3_phone"></span>
+                            <span data-i18n="ref_p3_email"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+            <h3 data-i18n="ref_family_heading"></h3>
+            <ul class="ref-list">
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_f1_name"></span>
+                            <span class="ref-relation" data-i18n="ref_f1_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_f1_phone"></span>
+                            <span data-i18n="ref_f1_email"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_f2_name"></span>
+                            <span class="ref-relation" data-i18n="ref_f2_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_f2_phone"></span>
+                            <span data-i18n="ref_f2_email"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ref-row">
+                        <div class="ref-person">
+                            <span class="ref-name" data-i18n="ref_f3_name"></span>
+                            <span class="ref-relation" data-i18n="ref_f3_relation"></span>
+                        </div>
+                        <div class="ref-contact">
+                            <span data-i18n="ref_f3_phone"></span>
+                            <span data-i18n="ref_f3_email"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Archivos JavaScript de control de traducciones y lógica de la interfaz -->
+    <script src="lang.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Script de inicialización obligatoria para el motor de traducción de Google -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'es',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

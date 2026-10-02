@@ -1,0 +1,8 @@
+services:
+  cv-web:
+    image: nginx:alpine
+    volumes:
+      - /home/orangepi/curriculum:/usr/share/nginx/html
+    ports:
+      - "8720:80"
+    restart: unless-stopped

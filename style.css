@@ -1,0 +1,397 @@
+/* ==========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ================================---------- */
+:root {
+    --primary-color: #2563eb; /* Azul corporativo principal para acentos y títulos */
+    --bg-color: #f1f5f9;      /* Color de fondo general de la página (gris muy claro) */
+    --text-main: #0f172a;     /* Color principal para textos oscuros y nombres */
+    --text-muted: #475569;    /* Color secundario para descripciones y datos menores */
+    --card-bg: #ffffff;       /* Color de fondo de la tarjeta principal del CV */
+}
+
+/* Reset universal: elimina márgenes y rellenos por defecto, y estandariza la fuente */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Estilos base del cuerpo de la página */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ==========================================
+   2. ENCABEZADO (BOTÓN PDF Y SELECTOR DE IDIOMA)
+   ================================---------- */
+header {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: space-between; /* Separa el botón de PDF a la izquierda y los idiomas a la derecha */
+    align-items: center;
+}
+
+/* Estilo estético del botón de descarga de PDF */
+#download-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Efecto hover al pasar el cursor sobre el botón de PDF */
+#download-btn:hover {
+    border-color: var(--primary-color);
+}
+
+/* ==========================================
+   3. CONTENEDOR PRINCIPAL (TARJETA DEL CV)
+   ================================---------- */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Sombra elegante */
+}
+
+/* Sección superior de presentación y datos de contacto */
+#contact {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--bg-color); /* Línea divisoria inferior */
+}
+
+/* Nombre principal del currículum */
+h1 {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+/* Textos secundarios dentro del bloque de contacto */
+#contact p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   4. SECCIONES Y TIPOGRAFÍA GENERAL
+   ================================---------- */
+section {
+    margin-bottom: 30px;
+}
+
+section:last-child {
+    margin-bottom: 0; /* Remueve el margen de la última sección */
+}
+
+/* Títulos de cada sección con un borde lateral decorativo */
+h2 {
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+/* Subtítulos para puestos de trabajo o instituciones educativas */
+h3 {
+    font-size: 16px;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+/* Párrafos generales del contenido */
+p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* Espaciado para bloques de experiencia y estudios */
+.job, .school {
+    margin-bottom: 20px;
+    padding-left: 14px;
+}
+
+.job:last-child, .school:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================
+   5. DISEÑO DE REFERENCIAS (SIMÉTRICO)
+   ================================---------- */
+.ref-list {
+    list-style-type: none; /* Elimina viñetas predeterminadas */
+    margin-left: 0;
+}
+
+/* Línea divisoria tenue entre cada persona de referencia */
+.ref-list li {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.ref-list li:last-child {
+    border-bottom: none;
+}
+
+/* Estructura en línea para mantener la simetría de las columnas */
+.ref-row {
+    display: inline-flex;
+    width: 100%;
+}
+
+/* Contenedor fijo para nombre y parentesco */
+.ref-person {
+    display: flex;
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.ref-name {
+    width: 170px;
+    color: var(--text-main);
+}
+
+.ref-relation {
+    width: 130px;
+    color: var(--text-muted);
+}
+
+/* Columna de datos de contacto de las referencias */
+.ref-contact {
+    display: flex;
+    flex-direction: column; /* Asegura que el correo baje a la siguiente línea */
+}
+
+/* ==========================================
+   6. ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (RESPONSIVE)
+   ================================---------- */
+@media (max-width: 600px) {
+    main {
+        padding: 25px 20px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .ref-row {
+        flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+    }
+    .ref-person {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    .ref-name {
+        width: auto;
+        margin-right: 10px;
+    }
+    .ref-relation {
+        width: auto;
+    }
+}
+
+/* ==========================================
+   7. LISTAS Y ENLACES GENERALES DEL CUERPO
+   ================================---------- */
+ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+strong {
+    color: var(--text-main);
+}
+
+/* Enlaces generales del currículum (LinkedIn, GitHub) */
+#contact a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: text-decoration 0.2s ease;
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   8. EFECTO COLAPSIBLE DE LAS SECCIONES
+   ================================---------- */
+section h2 {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: opacity 0.2s ease;
+}
+
+section h2:hover {
+    opacity: 0.8;
+}
+
+/* Iconos dinámicos de expandir/contraer (símbolos + y -) */
+section h2::after {
+    content: '−';
+    position: absolute;
+    right: 10px;
+    color: var(--primary-color);
+}
+
+section.collapsed h2::after {
+    content: '+';
+}
+
+/* Oculta los elementos hijos cuando la sección está contraída */
+section.collapsed > *:not(h2) {
+    display: none;
+}
+
+/* ==========================================
+   9. CONFIGURACIÓN PARA LA EXPORTACIÓN DE PDF
+   ================================---------- */
+main.exporting-pdf {
+    box-shadow: none !important;
+    padding: 10px !important;
+}
+
+main.exporting-pdf section h2::after {
+    display: none !important; /* Oculta los símbolos + y - en el documento PDF final */
+}
+
+/* Bloqueo estricto para evitar que los scripts de traducción muevan o corten el diseño */
+html, body {
+    top: 0 !important;
+    position: static !important;
+    height: auto !important;
+}
+
+/* Oculta los elementos automáticos y barras invasivas del traductor de Google */
+.goog-te-banner-frame, .skiptranslate, #google_translate_element {
+    display: none !important;
+}
+
+/* ==========================================
+   10. ESTILOS DEL SELECTOR DE IDIOMA PERSONALIZADO
+   ================================---------- */
+.lang-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.custom-select {
+    position: relative;
+    width: 220px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.select-selected {
+    background-color: var(--card-bg);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-main);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.select-selected::after {
+    content: '▼';
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.select-items {
+    position: absolute;
+    background-color: var(--card-bg);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    top: 110%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-items div {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-main);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    user-select: none;
+}
+
+.select-items div:last-child {
+    border-bottom: none;
+}
+
+.select-items div:hover {
+    background-color: #f1f5f9;
+}
+
+/* Logo miniatura de Google para los idiomas traducidos dinámicamente */
+.google-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+}
+
+/* ==========================================
+   11. UNIFICACIÓN DE COLOR EN TODOS LOS ENLACES DE CONTACTO
+   ================================---------- */
+/* Apunta a todos los enlaces dentro de la sección #contact para forzarlos 
+   a usar el color principal del texto (negro/oscuro) en lugar del azul predeterminado */
+#contact a {
+    color: var(--text-main) !important;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+/* Efecto visual sutil al pasar el cursor (hover) sobre cualquier enlace de contacto */
+#contact a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
